@@ -4,16 +4,19 @@ import {Link} from "react-router-dom";
 import FilteredShows from "../show/FilteredShows";
 import {useContext} from "react";
 import {Context} from "../context/Context";
+import {useDispatch, useSelector} from "react-redux";
+import {DELETE_ROOM} from "../redux/room/actions";
 
 export default function Show(props) {
     const {removeShow} = props;
     const [filteredMovies, setFilteredMovies] = useState('');
     const {database} = useContext(Context);
-    // console.log(database);
+    const shows = useSelector((store) => store.show);
+
 
     let filterByMovie;
 
-    const shows = {...database.shows};
+    //const shows = {...database.shows};
 
     Object.values(shows).filter(movieTitle => movieTitle.movie.movieTitle===filteredMovies);
     if (filteredMovies) {

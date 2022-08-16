@@ -5,7 +5,8 @@ import {ErrorMessage} from "@hookform/error-message";
 
 export default function MovieForm(props) {
     const {register, handleSubmit, formState: { errors }, setValue} = useForm({criteriaMode:"all"});
-    const {movies, movie, onFormSubmitHandler} = props;
+        const {movies, movie, onFormSubmitHandler} = props;
+    console.log(movie);
     const isEditing = movie !== undefined;
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export default function MovieForm(props) {
         }},[])
 
     const onSubmit = (data) => {
+        console.log(data);
         onFormSubmitHandler(data);
     };
 

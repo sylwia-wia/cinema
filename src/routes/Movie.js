@@ -1,22 +1,25 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {getMovies} from "../utils/Selectors";
 import {Pencil, Trash3} from "react-bootstrap-icons";
-import {useContext} from "react";
-import {Context} from "../context/Context";
+import {useDispatch, useSelector} from "react-redux";
+import {DELETE_MOVIE} from "../redux/movie/actions";
 
 
-export default function Movie(props) {
-    const { removeMovie} = props;
-    const {database} = useContext(Context);
+export default function Movie() {
+
+    const movies = useSelector((store) => store.movie);
+    const dispatch = useDispatch();
 
     function onClickRemoveHandler(movieID) {
-        removeMovie(movieID);
+        dispatch({
+            type: DELETE_MOVIE,
+            payload: movieID,
+        });
+        console.log(movieID);
     }
 
-
-    const rekordyTabeli = getMovies(database).map((movie, index) => (
+    const rekordyTabeli =  Object.values(movies).map((movie, index) => (
         <tr key={index}>
             <td>
                 {index + 1}

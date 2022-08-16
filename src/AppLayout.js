@@ -14,13 +14,7 @@ import Ticket from "./ticket/Ticket";
 
 function AppLayout(props) {
     const {
-        addRoom,
-        addMovie,
         addShow,
-        removeRoom,
-        updateRoom,
-        removeMovie,
-        updateMovie,
         removeShow,
         updateShow,
         addTicket
@@ -58,12 +52,12 @@ function AppLayout(props) {
 
                            <Routes>
                                <Route path={'/'} element={<Rooms />} />
-                               <Route path="/rooms" element={<Rooms removeRoom={removeRoom} />} />
-                               <Route path="/rooms/create" element={<RoomsCreate addRoom={addRoom}/>} />
-                               <Route path="/rooms/update/:roomID" element={<RoomsUpdate  updateRoom={updateRoom} />} />
-                               <Route path="/movie" element={<Movie removeMovie={removeMovie} />} />
-                               <Route path="/movie/create" element={<MovieCreate  addMovie={addMovie} />} />
-                               <Route path="/movie/update/:movieID" element={<MovieUpdate updateMovie={updateMovie} />} />
+                               <Route path="/rooms" element={<Rooms  />} />
+                               <Route path="/rooms/create" element={<RoomsCreate />} />
+                               <Route path="/rooms/update/:roomID" element={<RoomsUpdate />} />
+                               <Route path="/movie" element={<Movie  />} />
+                               <Route path="/movie/create" element={<MovieCreate />} />
+                               <Route path="/movie/update/:movieID" element={<MovieUpdate />} />
                                <Route path="/show" element={<Show removeShow={removeShow} />} />
                                <Route path="/show/create" element={<ShowCreate addShow={addShow} />} />
                                <Route path="/show/update/:showID" element={<ShowUpdate updateShow={updateShow} />} />

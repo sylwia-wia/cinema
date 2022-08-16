@@ -1,21 +1,23 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {getRooms} from "../utils/Selectors";
-import {Trash3, Pencil} from 'react-bootstrap-icons';
-import {useContext} from "react";
-import {Context} from "../context/Context";
+import {Pencil, Trash3} from 'react-bootstrap-icons';
+import {useDispatch, useSelector} from "react-redux";
+import {DELETE_ROOM} from "../redux/room/actions";
 
 
-export default function Rooms(props) {
-    const { removeRoom} = props;
-    const {database } = useContext(Context);
+export default function Rooms() {
+    const rooms = useSelector((store) => store.room);
+    const dispatch = useDispatch();
 
     function onClickRemoveHandler(roomID) {
-        removeRoom(roomID);
+        dispatch({
+            type: DELETE_ROOM,
+            payload: roomID,
+        });
     }
 
-    const rekordyTabeli = getRooms(database).map((room, index) => (
+    const rekordyTabeli = Object.values(rooms).map((room, index) => (
 
         <tr key={index}>
             <td>
@@ -35,7 +37,6 @@ export default function Rooms(props) {
                 <button onClick={() => onClickRemoveHandler(room.roomID)} className="btn btn-btn-dark px-2 float-end">
                    <Trash3 />
                 </button>
-
             </td>
          </tr>
      ));
@@ -55,9 +56,7 @@ export default function Rooms(props) {
                     <th>#</th>
                     <th>Numer sali</th>
                     <th>Dostępne miejsca</th>
-
                 </tr>
-
                 </thead>
                 <tbody>
                 {rekordyTabeli}

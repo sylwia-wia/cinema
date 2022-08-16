@@ -1,68 +1,24 @@
 import './App.css';
 import AppLayout from "./AppLayout"
-import {useContext, useEffect } from "react";
+import {useContext} from "react";
 import {getMovieByID, getRoomByID} from "./utils/Selectors";
 import React from "react";
 import moment from "moment/moment";
 import {Context} from "./context/Context";
+import store from "./redux";
 
 function App() {
     const {database, setDatabase} = useContext(Context);
 
-    useEffect(() => {
-        localStorage.setItem('database', JSON.stringify(database));
-    }, [database.rooms, database.movies, database.shows]);
-
-    const addRoom = (roomData) => {
-        const rooms = {...database.rooms};
-        let id = 1;
-
-        if (Object.keys(rooms).length > 0) {
-            const ids = Object.keys(rooms).map(id => parseInt(id))
-            id = Math.max(...ids) + 1
-        }
-
-        roomData.roomID = id;
-        rooms[roomData.roomID] = roomData;
-
-        setDatabase({
-            ...database,
-            rooms: {...rooms},
-        });
-    }
-
-    const removeRoom = (roomID) => {
-        delete database.rooms[roomID];
-        setDatabase({
-            ...database
-        });
-    }
+    store.subscribe(() => {
+        localStorage.setItem('state',JSON.stringify(store.getState()))
+    })
 
     const removeShow = (showID) => {
         delete database.shows[showID];
         setDatabase({
             ...database
         });
-    }
-
-    const updateRoom = (roomID, data) => {
-        setDatabase({
-            ...database,
-            rooms: {
-                ...database.rooms,
-                [roomID]: {...data}
-            }
-        });
-    }
-
-    const updateMovie = (movieID, data) => {
-        setDatabase({
-            ...database,
-            movies: {
-                ...database.movies,
-                [movieID]: {...data}
-            }
-            });
     }
 
     const updateShow = (showID, data) => {
@@ -93,31 +49,6 @@ function App() {
                  [showID]: {...chooseShow}
              }
          })
-    }
-
-    const addMovie = (movieData) => {
-        const movies = {...database.movies};
-        let id = 1;
-
-        if (Object.keys(movies).length > 0) {
-            const ids = Object.keys(movies).map(id => parseInt(id))
-            id = Math.max(...ids) + 1
-        }
-
-        movieData.movieID = id;
-        movies[movieData.movieID] = movieData;
-
-        setDatabase({
-            ...database,
-            movies: {...movies}
-        });
-    }
-
-    const removeMovie = (movieID) => {
-        delete database.movies[movieID];
-        setDatabase({
-            ...database,
-        });
     }
 
     const addShow = (showData) => {
@@ -153,13 +84,7 @@ function App() {
         <>
             <AppLayout
                 database={database}
-                addRoom={addRoom}
-                addMovie={addMovie}
                 addShow={addShow}
-                removeRoom={removeRoom}
-                updateRoom={updateRoom}
-                removeMovie={removeMovie}
-                updateMovie={updateMovie}
                 removeShow={removeShow}
                 updateShow={updateShow}
                 addTicket={addTicket}

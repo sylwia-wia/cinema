@@ -3,14 +3,20 @@ import {useNavigate} from "react-router-dom";
 import RoomForm from "./RoomForm";
 import {useContext} from "react";
 import {Context} from "../context/Context";
+import {useDispatch} from "react-redux";
+import {CREATE_ROOM} from "../redux/room/actions";
 
-export default function RoomsCreate(props) {
+export default function RoomsCreate() {
     const {database} = useContext(Context);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
     function onFormSubmitHandler(formData) {
-        props.addRoom(formData);
+        dispatch({
+            type: CREATE_ROOM,
+            payload: formData,
+        });
         navigate('/rooms');
     }
 

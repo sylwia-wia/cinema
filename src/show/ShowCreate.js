@@ -3,14 +3,21 @@ import {useNavigate} from "react-router-dom";
 import ShowForm from "./ShowForm";
 import {useContext} from "react";
 import {Context} from "../context/Context";
+import {useDispatch} from "react-redux";
+import {CREATE_SHOW} from "../redux/show/actions";
 
 
 export default function ShowCreate(props) {
     const {database} = useContext(Context);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function onFormSubmitHandler(formData) {
-        props.addShow(formData);
+        //props.addShow(formData);
+        dispatch({
+            type: CREATE_SHOW,
+            payload: formData,
+        });
         navigate('/show');
     }
 

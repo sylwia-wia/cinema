@@ -1,22 +1,24 @@
-import {useParams} from "react-router-dom";
-import {getRoomByID} from "../utils/Selectors";
+import {useNavigate, useParams} from "react-router-dom";
 import RoomForm from "./RoomForm";
-import {useNavigate} from "react-router-dom";
-import {useContext} from "react";
-import {Context} from "../context/Context";
+import {useDispatch, useSelector} from "react-redux";
+import {UPDATE_ROOM} from "../redux/room/actions";
 
 export default function RoomsUpdate(props) {
     const navigate = useNavigate();
-    const {database} = useContext(Context);
     const {roomID} = useParams();
+    const dispatch = useDispatch();
+    const room = useSelector(state => state.room[roomID]);
+    const rooms = Object.values(useSelector(state => state.room));
 
-    const room = getRoomByID(database, roomID);
-    const {rooms} = database;
+    console.log(room);
 
     function onFormSubmitHandler(formData) {
         formData.roomID = room.roomID;
 
-        props.updateRoom(formData.roomID, formData);
+        dispatch({
+            type: UPDATE_ROOM,
+            payload: formData,
+        });
         navigate('/rooms')
     }
 

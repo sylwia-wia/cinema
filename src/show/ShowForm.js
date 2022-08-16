@@ -5,20 +5,23 @@ import 'moment/locale/pl';
 import {useForm, Controller} from "react-hook-form";
 
 export default function ShowForm(props) {
-    const {show, movies, rooms} = props;
+    const {show, movies, rooms,onFormSubmitHandler} = props;
     const isEditing = show !== undefined;
     const [movieID, setMovieID] = useState(isEditing ? show.movieID : '');
     const [roomID, setRoomID] = useState(isEditing  ? show.roomID : '');
 
     const {register, handleSubmit, control, formState: { errors }} = useForm({criteriaMode:"all", defaultValues: {showDate: (isEditing ? show.showDate : '') }});
 
-    function onSubmit(data) {
-        props.onFormSubmitHandler({
-            showDate: data.showDate.format('YYYY-MM-DD HH:mm:ss'),
-            movieID,
-            roomID,
-        })
-    }
+    // function onSubmit(data) {
+    //     props.onFormSubmitHandler({
+    //         showDate: data.showDate.format('YYYY-MM-DD HH:mm:ss'),
+    //         movieID,
+    //         roomID,
+    //     })
+    // }
+    const onSubmit = (data) => {
+        onFormSubmitHandler(data);
+    };
 
     const moviesOptions = Object.keys(movies).map(id =>
         <option key={id} value={id}>{movies[id].movieTitle}</option>
