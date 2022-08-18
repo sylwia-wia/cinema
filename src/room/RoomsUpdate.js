@@ -10,7 +10,6 @@ export default function RoomsUpdate(props) {
     const room = useSelector(state => state.room[roomID]);
     const rooms = Object.values(useSelector(state => state.room));
 
-    console.log(room);
 
     function onFormSubmitHandler(formData) {
         formData.roomID = room.roomID;

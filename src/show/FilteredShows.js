@@ -19,7 +19,7 @@ export default function FilteredShows(props) {
                     {index + 1}
                 </td>
                 <td>
-                    {show.movie.movieTitle}
+                    {show.movie.title}
                 </td>
                 <td>
                     {show.room.roomNumber}
@@ -29,7 +29,7 @@ export default function FilteredShows(props) {
                 </td>
                 <td>
 
-                    {show.movie.movieTime}
+                    {show.movie.duration}
                 </td>
                 <td>
                     {moment(show.showDate).format('YYYY-MM-DD HH:mm')}

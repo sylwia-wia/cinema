@@ -7,8 +7,6 @@ export default function RoomForm(props) {
     const isEditing = room !== undefined;
     const {register, handleSubmit, formState: {errors}, setValue} = useForm({criteriaMode: "all"});
 
-    console.log(room);
-
     useEffect(() => {
         if (isEditing) {
             setValue('roomNumber', room.roomNumber);

@@ -2,25 +2,24 @@ import React, {useState} from "react";
 import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import FilteredShows from "../show/FilteredShows";
-import {useContext} from "react";
-import {Context} from "../context/Context";
-import {useDispatch, useSelector} from "react-redux";
-import {DELETE_ROOM} from "../redux/room/actions";
+import { useSelector} from "react-redux";
 
 export default function Show(props) {
     const {removeShow} = props;
     const [filteredMovies, setFilteredMovies] = useState('');
-    const {database} = useContext(Context);
+
     const shows = useSelector((store) => store.show);
+    const rooms = useSelector((store) => store.room);
 
 
     let filterByMovie;
+    if(shows){
+        Object.values(shows).filter(movieTitle => movieTitle.movie.title===filteredMovies);
+    }
 
-    //const shows = {...database.shows};
-
-    Object.values(shows).filter(movieTitle => movieTitle.movie.movieTitle===filteredMovies);
-    if (filteredMovies) {
-        const filteringMovies = Object.values(shows).filter(movieTitle => movieTitle.movie.movieTitle.toLowerCase().includes(filteredMovies.toLowerCase()));
+     if (filteredMovies) {
+        const filteringMovies = Object.values(shows).filter(movieTitle => movieTitle.movie.title.toLowerCase().includes(filteredMovies.toLowerCase()));
+        console.log(filteringMovies);
         if (filteringMovies) {
             filterByMovie = [<FilteredShows key={filteredMovies} filterShow={filteringMovies} removeShow={removeShow}/>];
         } else {

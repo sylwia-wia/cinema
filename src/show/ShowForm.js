@@ -3,24 +3,24 @@ import React, {useState} from "react";
 import moment from "moment/moment";
 import 'moment/locale/pl';
 import {useForm, Controller} from "react-hook-form";
+import {useSelector, useStore} from "react-redux";
 
 export default function ShowForm(props) {
-    const {show, movies, rooms,onFormSubmitHandler} = props;
+    const {show, movies, rooms} = props;
     const isEditing = show !== undefined;
     const [movieID, setMovieID] = useState(isEditing ? show.movieID : '');
     const [roomID, setRoomID] = useState(isEditing  ? show.roomID : '');
 
     const {register, handleSubmit, control, formState: { errors }} = useForm({criteriaMode:"all", defaultValues: {showDate: (isEditing ? show.showDate : '') }});
 
-    // function onSubmit(data) {
-    //     props.onFormSubmitHandler({
-    //         showDate: data.showDate.format('YYYY-MM-DD HH:mm:ss'),
-    //         movieID,
-    //         roomID,
-    //     })
-    // }
     const onSubmit = (data) => {
-        onFormSubmitHandler(data);
+        props.onFormSubmitHandler({
+            showDate: data.showDate.format('YYYY-MM-DD HH:mm:ss'),
+            movieID: parseInt(movieID),
+            roomID: parseInt(roomID)
+
+        });
+
     };
 
     const moviesOptions = Object.keys(movies).map(id =>
