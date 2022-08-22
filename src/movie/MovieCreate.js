@@ -1,28 +1,19 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import MovieForm from "./MovieForm";
-import {useContext} from "react";
-import {Context} from "../context/Context";
-import {useDispatch} from "react-redux";
-import {CREATE_MOVIE} from "../redux/movie/actions";
+import {useDispatch, useSelector, useStore} from "react-redux";
+import {createMovie} from "../redux/movie/actions";
 
-export default function MovieCreate(props) {
+export default function MovieCreate() {
     const navigate = useNavigate();
-    const {database} = useContext(Context);
-    const {movies} = database;
     const dispatch = useDispatch();
+    const movies = useSelector((store) => store.movie);
+    const store = useStore();
 
     function onFormSubmitHandler(formData) {
-       //props.addMovie(formData);
-        console.log(formData);
-        dispatch({
-            type: CREATE_MOVIE,
-            payload: formData,
-        });
+        dispatch(createMovie(store.getState(), formData));
         navigate('/movie');
-
     }
-    console.log(movies);
 
     return (
         <>

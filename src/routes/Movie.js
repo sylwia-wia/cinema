@@ -7,7 +7,6 @@ import {DELETE_MOVIE} from "../redux/movie/actions";
 
 
 export default function Movie() {
-
     const movies = useSelector((store) => store.movie);
     const dispatch = useDispatch();
 
@@ -16,7 +15,6 @@ export default function Movie() {
             type: DELETE_MOVIE,
             payload: movieID,
         });
-        console.log(movieID);
     }
 
     const rekordyTabeli =  Object.values(movies).map((movie, index) => (
@@ -56,7 +54,6 @@ export default function Movie() {
                     <th>#</th>
                     <th>Tytuł</th>
                     <th>Czas trwania (min)</th>
-
                 </tr>
 
                 </thead>

@@ -6,14 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter} from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
-import {ContextProvider} from "./context/Context";
 import {Provider} from "react-redux";
 import store from "./redux/store";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ContextProvider>
         <React.StrictMode>
             <Provider store={store}>
                 <BrowserRouter>
@@ -21,7 +19,6 @@ root.render(
                 </BrowserRouter>
             </Provider>
         </React.StrictMode>
-    </ContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

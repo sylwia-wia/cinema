@@ -1,12 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import {useForm} from "react-hook-form";
 import {useEffect} from "react";
 import {ErrorMessage} from "@hookform/error-message";
 
 export default function MovieForm(props) {
     const {register, handleSubmit, formState: { errors }, setValue} = useForm({criteriaMode:"all"});
-        const {movies, movie, onFormSubmitHandler} = props;
-    console.log(movie);
+    const {movies, movie, onFormSubmitHandler} = props;
     const isEditing = movie !== undefined;
 
     useEffect(() => {
@@ -16,7 +15,6 @@ export default function MovieForm(props) {
         }},[])
 
     const onSubmit = (data) => {
-        console.log(data);
         onFormSubmitHandler(data);
     };
 

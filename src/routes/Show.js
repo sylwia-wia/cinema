@@ -4,13 +4,9 @@ import {Link} from "react-router-dom";
 import FilteredShows from "../show/FilteredShows";
 import { useSelector} from "react-redux";
 
-export default function Show(props) {
-    const {removeShow} = props;
+export default function Show() {
     const [filteredMovies, setFilteredMovies] = useState('');
-
     const shows = useSelector((store) => store.show);
-    const rooms = useSelector((store) => store.room);
-
 
     let filterByMovie;
     if(shows){
@@ -19,9 +15,8 @@ export default function Show(props) {
 
      if (filteredMovies) {
         const filteringMovies = Object.values(shows).filter(movieTitle => movieTitle.movie.title.toLowerCase().includes(filteredMovies.toLowerCase()));
-        console.log(filteringMovies);
         if (filteringMovies) {
-            filterByMovie = [<FilteredShows key={filteredMovies} filterShow={filteringMovies} removeShow={removeShow}/>];
+            filterByMovie = [<FilteredShows key={filteredMovies} filterShow={filteringMovies} />];
         } else {
             filterByMovie = (
                 <h3 className={'text-center text-muted mt-5'}>
@@ -31,7 +26,7 @@ export default function Show(props) {
         }
     }
     else
-        filterByMovie = [<FilteredShows key={shows} filterShow={shows} removeShow={removeShow}/>]
+        filterByMovie = [<FilteredShows key={shows} filterShow={shows} />]
 
 
      return (
@@ -41,8 +36,7 @@ export default function Show(props) {
             <div className="input-group mb-3">
                 <input type="text" className="form-control" placeholder="Wyszukaj film"
                        aria-label="Search movie" aria-describedby="search"
-                       // ref={inputValue}
-                       value={filteredMovies ? props.value : ''}
+                       value={filteredMovies}
                        onChange={(e) =>  setFilteredMovies(e.target.value)}
                 />
                     <div className="input-group-append">

@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {UPDATE_MOVIE} from "../redux/movie/actions";
 
-export default function MovieUpdate(props) {
+export default function MovieUpdate() {
     const navigate = useNavigate();
     const {movieID} = useParams();
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export default function MovieUpdate(props) {
 
 
     function onFormSubmitHandler(formData) {
+        formData.movieID = movie.movieID;
         dispatch({
             type: UPDATE_MOVIE,
             payload: formData

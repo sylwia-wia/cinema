@@ -1,18 +1,9 @@
 import {useParams} from "react-router-dom";
-import {getShowByID} from "../utils/Selectors";
-import {useContext, useEffect} from "react";
-import {Context} from "../context/Context";
+import {useSelector} from "react-redux";
 
-
-export default function Ticket(props) {
+export default function Ticket() {
     const {showID, seatID} = useParams();
-    const {database} = useContext(Context);
-     const show = getShowByID(database, showID);
-
-    useEffect(() => {
-        props.addTicket(showID, seatID);
-    }, []);
-
+    const show = useSelector(state => state.show[showID]);
 
     return (
         <>

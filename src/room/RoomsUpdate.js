@@ -3,7 +3,7 @@ import RoomForm from "./RoomForm";
 import {useDispatch, useSelector} from "react-redux";
 import {UPDATE_ROOM} from "../redux/room/actions";
 
-export default function RoomsUpdate(props) {
+export default function RoomsUpdate() {
     const navigate = useNavigate();
     const {roomID} = useParams();
     const dispatch = useDispatch();

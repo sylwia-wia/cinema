@@ -1,13 +1,19 @@
 import moment from "moment/moment";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Pencil, Trash3} from "react-bootstrap-icons";
 import React from "react";
+import {deleteShow} from "../redux/show/actions";
+import {useDispatch} from "react-redux";
+
 
 export default function FilteredShows(props) {
-    const {removeShow, filterShow} = props;
+    const {filterShow} = props;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function onClickRemoveHandler(showID) {
-        removeShow(showID);
+        dispatch(deleteShow(showID));
+        navigate('/show')
     }
 
     const rekordyTabeli = Object.values(filterShow).map((show, index) => {

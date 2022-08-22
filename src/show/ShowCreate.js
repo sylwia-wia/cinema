@@ -10,8 +10,8 @@ export default function ShowCreate() {
     const dispatch = useDispatch();
     const store = useStore();
 
-    const movies = useSelector((state) => state.movie);
-    const rooms = useSelector((state) => state.room);
+    const rooms = Object.values(useSelector(state => state.room));
+    const movies = Object.values(useSelector(state => state.movie));
 
     const onFormSubmitHandler = (formData) => {
         dispatch(createShow(store.getState(), formData));
