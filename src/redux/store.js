@@ -1,19 +1,14 @@
+import { createStore } from 'redux';
 import rootReducer from './rootReducer';
-import {configureStore} from "@reduxjs/toolkit";
+import {applyMiddleware, compose} from "@reduxjs/toolkit";
 
-const persistedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {};
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+ const persistedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {};
 
-const store =  configureStore ({
-    reducer: rootReducer,
-    preloadedState: persistedState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false,
-    }),
-})
+const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware()));
 
 store.subscribe(() => {
  localStorage.setItem('state',JSON.stringify(store.getState()))
 })
 
- export default store;
-
+export default store;

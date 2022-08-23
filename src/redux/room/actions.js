@@ -1,12 +1,14 @@
 import {IDGenerator} from "../show/actions";
-import {createAction} from "@reduxjs/toolkit";
 
-export const createRoom = createAction('room/create');
-export const updateRoom = createAction('room/update');
-export const deleteRoom = createAction('room/delete');
+export const CREATE_ROOM = 'room/create';
+export const UPDATE_ROOM = 'room/update';
+export const DELETE_ROOM ='room/delete';
 
-export const roomCreate = (state, payload) => {
+export const createRoom = (state, payload) => {
     payload.roomID = IDGenerator('room', state);
 
-    return createRoom(payload);
+    return {
+            type: CREATE_ROOM,
+            payload: payload,
+        }
 }

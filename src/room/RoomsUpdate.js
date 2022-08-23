@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import RoomForm from "./RoomForm";
 import {useDispatch, useSelector} from "react-redux";
-import {updateRoom} from "../redux/room/actions";
+import {UPDATE_ROOM} from "../redux/room/actions";
 
 export default function RoomsUpdate() {
     const navigate = useNavigate();
@@ -13,7 +13,11 @@ export default function RoomsUpdate() {
 
     function onFormSubmitHandler(formData) {
         formData.roomID = room.roomID;
-        dispatch(updateRoom(formData));
+
+        dispatch({
+            type: UPDATE_ROOM,
+            payload: formData,
+        });
         navigate('/rooms')
     }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ShowDetail from "../show/ShowDetail";
-import {ticketBuy} from "../redux/show/actions";
+import {buyTicket} from "../redux/show/actions";
 import {useDispatch, useSelector, useStore} from "react-redux";
 
 export default function Buy (props) {
@@ -14,7 +14,7 @@ export default function Buy (props) {
     const show = useSelector((state) => state.show[showID]);
 
     function onFormSubmitHandler(showID, seatID) {
-        dispatch(ticketBuy(store.getState(), showID, seatID));
+        dispatch(buyTicket(store.getState(), showID, seatID));
          navigate('/show')
     }
 

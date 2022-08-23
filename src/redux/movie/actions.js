@@ -1,12 +1,15 @@
 import {IDGenerator} from "../show/actions";
-import {createAction} from "@reduxjs/toolkit";
 
-export const createMovie = createAction('movie/create');
-export const updateMovie = createAction('movie/update');
-export const deleteMovie = createAction('movie/delete');
+export const CREATE_MOVIE = 'movie/create';
+export const UPDATE_MOVIE = 'movie/update';
+export const DELETE_MOVIE = 'movie/delete';
 
-export const movieCreate = (state, payload) => {
+export const createMovie = (state, payload) => {
     payload.movieID = IDGenerator('movie', state);
-    return createMovie(payload);
+
+    return {
+        type: CREATE_MOVIE,
+        payload: payload
+    };
 }
 

@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import ShowForm from "./ShowForm";
 import React from "react";
-import {showUpdate} from "../redux/show/actions";
+import {updateShow} from "../redux/show/actions";
 import {useDispatch, useSelector, useStore} from "react-redux";
 
 export default function ShowUpdate() {
@@ -16,7 +16,7 @@ export default function ShowUpdate() {
 
     function onFormSubmitHandler(formData) {
         formData.showID = show.showID;
-        dispatch(showUpdate(store.getState(), formData));
+        dispatch(updateShow(store.getState(), formData));
         navigate('/show')
     }
 

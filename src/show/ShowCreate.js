@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import ShowForm from "./ShowForm";
 import {useDispatch, useSelector, useStore} from "react-redux";
-import {showCreate} from "../redux/show/actions";
+import {createShow} from "../redux/show/actions";
 
 
 export default function ShowCreate() {
@@ -14,7 +14,7 @@ export default function ShowCreate() {
     const movies = Object.values(useSelector(state => state.movie));
 
     const onFormSubmitHandler = (formData) => {
-        dispatch(showCreate(store.getState(), formData));
+        dispatch(createShow(store.getState(), formData));
          navigate('/show');
     }
 

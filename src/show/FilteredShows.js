@@ -2,7 +2,7 @@ import moment from "moment/moment";
 import {Link, useNavigate} from "react-router-dom";
 import {Pencil, Trash3} from "react-bootstrap-icons";
 import React from "react";
-import {showDelete} from "../redux/show/actions";
+import {deleteShow} from "../redux/show/actions";
 import {useDispatch} from "react-redux";
 
 
@@ -12,7 +12,7 @@ export default function FilteredShows(props) {
     const navigate = useNavigate();
 
     function onClickRemoveHandler(showID) {
-        dispatch(showDelete(showID));
+        dispatch(deleteShow(showID));
         navigate('/show')
     }
 

@@ -19,7 +19,7 @@ export default function Ticket() {
                                 <small>Numer biletu:</small>
                                 <h5 className={"card-title"}> {show.seats[seatID]}</h5>
                                 <small>Tytuł filmu:</small>
-                                <h5 className={"card-title"}> {show.movie.title}</h5>
+                                <h5 className={"card-title"}> {show.movie.movieTitle}</h5>
                                 <small>Sala: </small>
                                 <h5 className={"card-title"}>{show.room.roomNumber}</h5>
                                 <small>Miejsce: </small>

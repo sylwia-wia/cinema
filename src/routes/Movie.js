@@ -3,7 +3,7 @@ import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Pencil, Trash3} from "react-bootstrap-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteMovie} from "../redux/movie/actions";
+import {DELETE_MOVIE} from "../redux/movie/actions";
 
 
 export default function Movie() {
@@ -11,7 +11,10 @@ export default function Movie() {
     const dispatch = useDispatch();
 
     function onClickRemoveHandler(movieID) {
-        dispatch(deleteMovie(movieID));
+        dispatch({
+            type: DELETE_MOVIE,
+            payload: movieID,
+        });
     }
 
     const rekordyTabeli =  Object.values(movies).map((movie, index) => (

@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import RoomForm from "./RoomForm";
 import {useDispatch, useSelector, useStore} from "react-redux";
-import {roomCreate} from "../redux/room/actions";
+import {createRoom} from "../redux/room/actions";
 
 export default function RoomsCreate() {
     const dispatch = useDispatch();
@@ -11,10 +11,7 @@ export default function RoomsCreate() {
     const navigate = useNavigate();
 
     function onFormSubmitHandler(formData) {
-        dispatch(roomCreate(store.getState(),{
-            roomNumber: formData.roomNumber,
-            capacity: formData.capacity
-        }));
+        dispatch(createRoom(store.getState(), formData))
         navigate('/rooms');
     }
 
