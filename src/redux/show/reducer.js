@@ -1,39 +1,25 @@
-import {BUY_TICKET, CREATE_SHOW, DELETE_SHOW, UPDATE_SHOW} from "./actions";
+import {
+    buyTicket,
+    createShow,
+    deleteShow,
+    updateShow
+} from "./actions";
+import {createReducer} from "@reduxjs/toolkit";
 
-const ShowReducer = (state = {}, action) => {
-    switch (action.type) {
-        case CREATE_SHOW:
-            return {
-                ...state,
-                [action.payload.showID]: action.payload,
-            };
-        case UPDATE_SHOW:
-         return{
-                ...state,
-                [action.payload.showID]: action.payload,
-            };
-        case DELETE_SHOW:
+const initialState = {};
+
+export default createReducer(initialState, (builder) => {
+    builder
+        .addCase(createShow, (state, action) => {
+            state[action.payload.showID] = action.payload;
+        })
+        .addCase(updateShow, (state, action) => {
+            state[action.payload.showID] = action.payload;
+        })
+        .addCase(deleteShow, (state, action) => {
             delete state[action.payload];
-
-            return {
-                ...state,
-            }
-
-        case BUY_TICKET:
-            return {
-                ...state,
-                [action.payload.showID]: {
-                    ...state[action.payload.showID],
-                    seats: {
-                        ...state[action.payload.showID].seats,
-                        [action.payload.seatID]: action.payload.ticketID,
-                    }
-                }
-            };
-
-
-        default: return state;
-    }
-}
-
-export default ShowReducer;
+        })
+        .addCase(buyTicket, (state, action) => {
+            state[action.payload.showID].seats[action.payload.seatID] = action.payload.ticketID;
+        })
+})

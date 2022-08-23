@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import MovieForm from "./MovieForm";
 import {useDispatch, useSelector, useStore} from "react-redux";
-import {createMovie} from "../redux/movie/actions";
+import {movieCreate} from "../redux/movie/actions";
 
 export default function MovieCreate() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function MovieCreate() {
     const store = useStore();
 
     function onFormSubmitHandler(formData) {
-        dispatch(createMovie(store.getState(), formData));
+        dispatch(movieCreate(store.getState(), formData));
         navigate('/movie');
     }
 

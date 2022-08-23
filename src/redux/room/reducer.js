@@ -1,27 +1,18 @@
-import {CREATE_ROOM, DELETE_ROOM, UPDATE_ROOM} from "./actions";
+import {createReducer} from "@reduxjs/toolkit";
+import {createRoom, deleteRoom, updateRoom} from "./actions";
 
-const RoomReducer = (state = {}, action) => {
-    switch (action.type) {
-        case CREATE_ROOM:
-            return {
-                ...state,
-                [action.payload.roomID]: action.payload,
-            };
+const initialState = {};
 
-        case UPDATE_ROOM:
-            return{
-                ...state,
-                [action.payload.roomID]: {...action.payload}
-            };
-
-        case DELETE_ROOM:
+export default createReducer(initialState, (builder) => {
+    builder
+        .addCase(createRoom, (state, action) => {
+            state[action.payload.roomID] = action.payload;
+        })
+        .addCase(updateRoom, (state, action) => {
+            state[action.payload.roomID] = action.payload;
+        })
+        .addCase(deleteRoom, (state, action) => {
             delete state[action.payload];
-            return {
-                ...state,
-            }
-
-        default: return state;
+        })
     }
-}
-
-export default RoomReducer;
+)

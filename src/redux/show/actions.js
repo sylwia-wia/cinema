@@ -1,51 +1,39 @@
 import moment from "moment/moment";
+import {createAction} from "@reduxjs/toolkit";
 
-export const CREATE_SHOW = 'show/create';
-export const UPDATE_SHOW = 'show/update';
-export const DELETE_SHOW = 'show/delete';
-export const BUY_TICKET = 'show/buy';
+export const createShow = createAction('show/create');
+export const updateShow = createAction('show/update');
+export const deleteShow = createAction('show/delete');
+export const buyTicket = createAction('show/buy');
 
 export const getMovieByID = (state, id) => state.movie[id];
 export const getRoomByID = (state, id) => state.room[id];
 
-export const createShow = (state, payload) => {
+export const showCreate = (state, payload) => {
     payload.showID = IDGenerator('show', state);
     payload = prepareShowData(state, payload);
 
-    return {
-        type: CREATE_SHOW,
-        payload: payload
-    };
+    return createShow(payload);
 }
 
-export const updateShow = (state, payload) => {
+export const showUpdate = (state, payload) => {
     payload = prepareShowData(state, payload);
-
-    return {
-        type: UPDATE_SHOW,
-        payload: payload
-    };
+    return updateShow(payload);
 }
 
-export const deleteShow = (payload) => {
-    return {
-        type: DELETE_SHOW,
-        payload: payload
-    };
+export const showDelete = (payload) => {
+    return deleteShow(payload);
 }
 
-export const buyTicket = (state, showID, seatID) => {
+export const ticketBuy = (state, showID, seatID) => {
     const ticketID = Math.random().toString(36).substring(7);
 
-    return {
-        type: BUY_TICKET,
-        payload: {
-            showID: showID,
-            seatID: seatID,
-            ticketID: ticketID
-        }
-    };
-}
+    return buyTicket({
+        showID,
+        seatID,
+        ticketID
+    });
+};
 
 export function IDGenerator(entityName, state) {
     let id = 1;
@@ -54,6 +42,11 @@ export function IDGenerator(entityName, state) {
     if (Object.keys(state[entityName]).length > 0) {
         id = Math.max(...IDs) + 1;
     }
+
+    if (isNaN(id)) {
+        return 1;
+    }
+
     return id;
 }
 

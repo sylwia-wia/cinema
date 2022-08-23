@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from "@reduxjs/toolkit";
 import RoomReducer from "./room/reducer";
 import MovieReducer from "./movie/reducer";
 import ShowReducer from "./show/reducer";

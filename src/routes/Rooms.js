@@ -3,18 +3,14 @@ import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Pencil, Trash3} from 'react-bootstrap-icons';
 import {useDispatch, useSelector} from "react-redux";
-import {DELETE_ROOM} from "../redux/room/actions";
-
+import {deleteRoom} from "../redux/room/actions";
 
 export default function Rooms() {
-    const rooms = useSelector((store) => store.room);
+    const rooms = useSelector((state) => state.room);
     const dispatch = useDispatch();
 
     function onClickRemoveHandler(roomID) {
-        dispatch({
-            type: DELETE_ROOM,
-            payload: roomID,
-        });
+        dispatch(deleteRoom(roomID));
     }
 
     const rekordyTabeli = Object.values(rooms).map((room, index) => (
